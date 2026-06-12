@@ -1977,44 +1977,6 @@ class OSExtended(System):
             )
         return rc
 
-    def ftserv_get(
-        self, source, destination, hostname=None, logname=None, port=None
-    ):
-        """Get a file using FtServ."""
-        if self.ftserv_allowed(source, destination):
-            if self.filecocoon(destination):
-                hostname = self.fix_fthostname(hostname, fatal=False)
-                logname = self.fix_ftuser(hostname, logname, fatal=False)
-                destination = self.path.expanduser(destination)
-                extras = list()
-                if hostname:
-                    if port is not None:
-                        hostname += ":{:s}".format(port)
-                    extras.extend(["-h", hostname])
-                if logname:
-                    extras.extend(["-u", logname])
-                ftcmd = self.ftgetcmd or "ftget"
-                try:
-                    rc = self.spawn(
-                        [
-                            ftcmd,
-                        ]
-                        + extras
-                        + [source, destination],
-                        output=False,
-                    )
-                except ExecutionError:
-                    rc = False
-            else:
-                raise OSError("Could not cocoon: {!s}".format(destination))
-        else:
-            raise OSError(
-                "Source or destination is not a plain file path: {!r}".format(
-                    source
-                )
-            )
-        return rc
-
     def ftserv_batchget(
         self, source, destination, hostname=None, logname=None, port=None
     ):

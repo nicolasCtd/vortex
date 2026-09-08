@@ -851,28 +851,25 @@ class OSExtended(System):
         # Initialise the signal handler object
         self._signal_intercept_init()
 
-    def has_batchget_ftp(self):
-        return self._batchget_ftp_method() is not None
+    # def has_batchget_ftp(self):
+    #     return self._batchget_ftp_method() is not None
 
-    def _batchget_ftp_method(self):
+    @property
+    def batch_get_ftp_method(self):
         """Return the highest-priority batch FTP GET method available."""
-        return next(
-            (
-                ftp_method
-                for ftp_method in self.ftp_methods
-                if ftp_method.get_batch_condition()
-            ),
-            None,
-        )
+        for method in self.ftp_methods:
+            if method.get_batch_condition():
+                return method
+        return None
 
     def batchget_ftp(self, *args, **kwargs):
         """Use the highest-priority method suitable for batch FTP GET transfers."""
-        ftp_method = self._batchget_ftp_method()
+        ftp_method = self.batch_get_ftp_method
 
-        if ftp_method is not None:
-            return ftp_method.get_batch(*args, **kwargs)
+        if not ftp_method:
+            raise RuntimeError("No batch transfer method was found")
 
-        return None
+        return ftp_method.get_batch(*args, **kwargs)
 
     def target(self, **kw):
         """

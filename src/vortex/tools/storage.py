@@ -763,7 +763,7 @@ class Archive(AbstractArchive):
         """
         Trigger a delayed action in order to fetch several files at once.
         """
-        if self.sh.batchget_ftp:
+        if self.sh.has_batchget_ftp():
             return self.context.delayedactions_hub.register(
                 (item, kwargs.get("fmt", "foo")),
                 kind="archive",

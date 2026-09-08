@@ -851,9 +851,6 @@ class OSExtended(System):
         # Initialise the signal handler object
         self._signal_intercept_init()
 
-    # def has_batchget_ftp(self):
-    #     return self._batchget_ftp_method() is not None
-
     @property
     def batch_get_ftp_method(self):
         """Return the highest-priority batch FTP GET method available."""

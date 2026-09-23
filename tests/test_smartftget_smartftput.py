@@ -12,9 +12,8 @@ HOSTNAME = "hendrix.meteo.fr"
 LOGNAME = "username"
 
 
-# smartftget -> default method.
 @patch("vortex.tools.systems.OSExtended.ftget")
-def test_smartftget(mocked_ftget):
+def test_smartftget_uses_default_method(mocked_ftget):
     system = Linux34p()
 
     system.smartftget(
@@ -35,9 +34,8 @@ def test_smartftget(mocked_ftget):
     )
 
 
-# smartftput -> default method.
 @patch("vortex.tools.systems.OSExtended.ftput")
-def test_smartftput(mocked_ftput):
+def test_smartftput_uses_default_method(mocked_ftput):
     system = Linux34p()
 
     system.smartftput(
@@ -60,7 +58,6 @@ def test_smartftput(mocked_ftput):
     )
 
 
-# smartftget -> new method if getcond=True.
 @patch("vortex.tools.systems.OSExtended.ftget")
 def test_smartftget_uses_new_method_when_getcond_is_true(mocked_ftget):
     mocked_other_ftget = Mock()
@@ -96,7 +93,6 @@ def test_smartftget_uses_new_method_when_getcond_is_true(mocked_ftget):
     )
 
 
-# smartftput -> new method if putcond=True.
 @patch("vortex.tools.systems.OSExtended.ftput")
 def test_smartftput_uses_new_method_when_putcond_is_true(mocked_ftput):
     mocked_other_ftget = Mock()
@@ -135,9 +131,8 @@ def test_smartftput_uses_new_method_when_putcond_is_true(mocked_ftput):
     )
 
 
-# smartftget -> fallback to the default method if getcond=False.
 @patch("vortex.tools.systems.OSExtended.ftget")
-def test_smartftget_uses_default_method_when_getcond_is_false(mocked_ftget):
+def test_smartftget_fallback_to_default_method_when_getcond_is_false(mocked_ftget):
     mocked_other_ftget = Mock()
     mocked_other_ftput = Mock()
     mocked_other_ftgetbatch = Mock()
@@ -172,9 +167,8 @@ def test_smartftget_uses_default_method_when_getcond_is_false(mocked_ftget):
     )
 
 
-# smartftput -> fallback to the default method if putcond=False.
 @patch("vortex.tools.systems.OSExtended.ftput")
-def test_smartftput_uses_default_method_when_putcond_is_false(mocked_ftput):
+def test_smartftput_fallback_to_default_method_when_putcond_is_false(mocked_ftput):
     mocked_other_ftget = Mock()
     mocked_other_ftput = Mock()
     mocked_other_ftgetbatch = Mock()
@@ -225,7 +219,7 @@ def test_smartftput_uses_fa_ftput(mocked_fa_ftput):
         hostname=HOSTNAME,
         logname=LOGNAME,
         port=DEFAULT_FTP_PORT,
-        fmt="fa", # triggers the call to fa_ftput
+        fmt="fa", # trigger the call to fa_ftput
     )
 
     mocked_fa_ftput.assert_called_once_with(

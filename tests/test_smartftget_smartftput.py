@@ -65,13 +65,16 @@ def test_smartftput(mocked_ftput):
 def test_smartftget_uses_new_method_when_getcond_is_true(mocked_ftget):
     mocked_other_ftget = Mock()
     mocked_other_ftput = Mock()
+    mocked_other_ftgetbatch = Mock()
 
     system = Linux34p()
     system.register_ftp_method(
         getfunc=mocked_other_ftget,
         putfunc=mocked_other_ftput,
+        getfunc_batch=mocked_other_ftgetbatch,
         getcond=lambda cpipeline=None: True,
         putcond=lambda cpipeline=None: True,
+        getcond_batch=lambda cpipeline=None: True,
     )
     system.smartftget(
         SOURCE,
@@ -98,13 +101,16 @@ def test_smartftget_uses_new_method_when_getcond_is_true(mocked_ftget):
 def test_smartftput_uses_new_method_when_putcond_is_true(mocked_ftput):
     mocked_other_ftget = Mock()
     mocked_other_ftput = Mock()
+    mocked_other_ftgetbatch = Mock()
 
     system = Linux34p()
     system.register_ftp_method(
         getfunc=mocked_other_ftget,
         putfunc=mocked_other_ftput,
+        getfunc_batch=mocked_other_ftgetbatch,
         getcond=lambda cpipeline=None: True,
         putcond=lambda cpipeline=None: True,
+        getcond_batch=lambda cpipeline=None: True,
     )
 
     system.smartftput(
@@ -134,13 +140,16 @@ def test_smartftput_uses_new_method_when_putcond_is_true(mocked_ftput):
 def test_smartftget_uses_default_method_when_getcond_is_false(mocked_ftget):
     mocked_other_ftget = Mock()
     mocked_other_ftput = Mock()
+    mocked_other_ftgetbatch = Mock()
 
     system = Linux34p()
     system.register_ftp_method(
         getfunc=mocked_other_ftget,
         putfunc=mocked_other_ftput,
+        getfunc_batch=mocked_other_ftgetbatch,
         getcond=lambda cpipeline=None: False,
         putcond=lambda cpipeline=None: False,
+        getcond_batch=lambda cpipeline=None: True,
     )
 
     system.smartftget(
@@ -168,13 +177,16 @@ def test_smartftget_uses_default_method_when_getcond_is_false(mocked_ftget):
 def test_smartftput_uses_default_method_when_putcond_is_false(mocked_ftput):
     mocked_other_ftget = Mock()
     mocked_other_ftput = Mock()
+    mocked_other_ftgetbatch = Mock()
 
     system = Linux34p()
     system.register_ftp_method(
         getfunc=mocked_other_ftget,
         putfunc=mocked_other_ftput,
+        getfunc_batch=mocked_other_ftgetbatch,
         getcond=lambda cpipeline=None: False,
         putcond=lambda cpipeline=None: False,
+        getcond_batch=lambda cpipeline=None: True,
     )
 
     system.smartftput(

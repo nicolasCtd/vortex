@@ -68,7 +68,7 @@ def test_smartftget_uses_new_method_when_getcond_is_true(mocked_ftget):
         getfunc=mocked_other_ftget,
         putfunc=mocked_other_ftput,
         getcond=lambda cpipeline=None: True,
-        putcond=lambda cpipeline=None, source=SOURCE: True,
+        putcond=lambda cpipeline=None: True,
     )
     system.smartftget(
         SOURCE,
@@ -100,7 +100,7 @@ def test_smartftput_uses_new_method_when_putcond_is_true(mocked_ftput):
         getfunc=mocked_other_ftget,
         putfunc=mocked_other_ftput,
         getcond=lambda cpipeline=None: True,
-        putcond=lambda cpipeline=None, source=SOURCE: True,
+        putcond=lambda cpipeline=None: True,
     )
 
     system.smartftput(
@@ -135,7 +135,7 @@ def test_smartftget_fallback_to_default_method_when_getcond_is_false(mocked_ftge
         getfunc=mocked_other_ftget,
         putfunc=mocked_other_ftput,
         getcond=lambda cpipeline=None: False,
-        putcond=lambda cpipeline=None, source=SOURCE: False,
+        putcond=lambda cpipeline=None: False,
     )
 
     system.smartftget(
@@ -168,7 +168,7 @@ def test_smartftput_fallback_to_default_method_when_putcond_is_false(mocked_ftpu
         getfunc=mocked_other_ftget,
         putfunc=mocked_other_ftput,
         getcond=lambda cpipeline=None: False,
-        putcond=lambda cpipeline=None, source=SOURCE: False,
+        putcond=lambda cpipeline=None: False,
     )
 
     system.smartftput(

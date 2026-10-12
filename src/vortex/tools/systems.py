@@ -69,6 +69,9 @@ from vortex.tools.net import AssistedSsh, AutoRetriesFtp, DEFAULT_FTP_PORT
 from vortex.tools.net import FtpConnectionPool, LinuxNetstats, StdFtp
 from vortex import config
 
+from vortex.debugging import debug
+import inspect
+
 #: No automatic export
 __all__ = []
 
@@ -2129,6 +2132,7 @@ class OSExtended(System):
             compress the data during the file transfer (default: *None*).
         :param bool sync: If False, allow asynchronous transfers.
         """
+        print(debug(__name__, inspect.currentframe()))
         if cpipeline is not None:
             if cpipeline.compress2rawftp(source):
                 return self.ftserv_put(
@@ -2242,6 +2246,7 @@ class OSExtended(System):
         :param int port: the port number on the remote host.
         :param CompressionPipeline cpipeline: unused (kept for compatibility)
         """
+        print(debug(__name__, inspect.currentframe()))
         if cpipeline is not None:
             raise OSError("cpipeline is not supported by this method.")
         return self.ftserv_get(
@@ -2267,6 +2272,7 @@ class OSExtended(System):
         :param int port: the port number on the remote host.
         :param CompressionPipeline cpipeline: unused (kept for compatibility)
         """
+        print(debug(__name__, inspect.currentframe()))
         if cpipeline is not None:
             raise OSError("cpipeline is not supported by this method.")
         return self.ftserv_batchget(

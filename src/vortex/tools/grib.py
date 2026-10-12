@@ -26,6 +26,9 @@ from vortex.algo.components import (
 )
 from vortex.tools.net import DEFAULT_FTP_PORT
 
+from vortex.debugging import debug
+import inspect
+
 #: No automatic export
 __all__ = []
 
@@ -282,6 +285,7 @@ class GRIB_Tool(addons.FtrawEnableAddon):
         sync=False,
     ):
         """Use ftserv as much as possible."""
+        print(debug(__name__, inspect.currentframe()))
         if self.is_xgrib(source):
             if cpipeline is not None:
                 raise OSError("It's not allowed to compress xgrib files.")

@@ -21,6 +21,9 @@ from . import addons, systems
 from vortex.layout import contexts
 from vortex.tools.net import DEFAULT_FTP_PORT
 
+from vortex.debugging import debug
+import inspect
+
 #: Export nothing
 __all__ = []
 
@@ -377,6 +380,7 @@ class LFI_Tool_Raw(addons.FtrawEnableAddon):
         sync=False,
     ):
         """Use ftserv as much as possible."""
+        print(debug(__name__, inspect.currentframe()))
         if self.is_xlfi(source):
             if cpipeline is not None:
                 raise OSError("It's not allowed to compress xlfi files.")

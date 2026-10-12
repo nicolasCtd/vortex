@@ -14,6 +14,9 @@ from vortex.tools.net import DEFAULT_FTP_PORT
 from vortex.util.iosponge import IoSponge
 from . import addons
 
+from vortex.debugging import debug
+import inspect
+
 #: No automatic export
 __all__ = []
 
@@ -330,6 +333,7 @@ class FolderShell(addons.FtrawEnableAddon):
         cpipeline=None,
     ):
         """Use ftserv as much as possible."""
+        print(debug(__name__, inspect.currentframe()))
         if cpipeline is not None:
             raise OSError("It's not allowed to compress folder like data.")
         if self.sh.ftraw:
@@ -361,6 +365,7 @@ class FolderShell(addons.FtrawEnableAddon):
         cpipeline=None,
     ):
         """Use ftserv to fetch several folder-like resources."""
+        print(debug(__name__, inspect.currentframe()))
         if cpipeline is not None:
             raise OSError("It's not allowed to compress folder like data.")
         if self.sh.ftraw:
@@ -456,6 +461,7 @@ class FolderShell(addons.FtrawEnableAddon):
         sync=False,
     ):
         """Use ftserv as much as possible."""
+        print(debug(__name__, inspect.currentframe()))
         if cpipeline is not None:
             raise OSError("It's not allowed to compress folder like data.")
         if self.sh.ftraw and self.rawftshell is not None:

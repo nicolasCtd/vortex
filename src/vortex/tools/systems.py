@@ -1932,6 +1932,7 @@ class OSExtended(System):
         sync=False,
     ):
         """Asynchronous put of a file using FtServ."""
+        print(debug(__name__, inspect.currentframe()))
         if self.ftserv_allowed(source, destination):
             if self.path.exists(source):
                 ftcmd = self.ftputcmd or "ftput"
@@ -2026,6 +2027,7 @@ class OSExtended(System):
 
         :note: **source** and **destination** are list or tuple.
         """
+        print(debug(__name__, inspect.currentframe()))
         if all(
             [self.ftserv_allowed(s, d) for s, d in zip(source, destination)]
         ):
